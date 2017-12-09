@@ -40,3 +40,11 @@ Examples:-
 `> rake db:migrate`<br>
 
 Start the server. Hit `localhost:3000`
+
+# Usage
+
+ - Access the query page at `localhost:3000` 
+ - To update CSV go to `localhost:3000/admin/login` 
+    - email: `admin@example.com`
+    - password: `password` <br>
+   login with these credentials and navigate to 'CSV Uploads' tab.
