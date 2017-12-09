@@ -1,7 +1,7 @@
 <div class="body-wrapper">
   <div class="csv-upload-btn-wrapper">
     <%= form_tag(upload_csv_object_statuses_path, multipart: true) do %>
-      <div><%= file_field_tag 'file' %><%= submit_tag 'Upload CSV', id: 'upload-submit' %></div>
+      <div><%= file_field_tag 'file' %><%= submit_tag 'Upload CSV', id: 'upload-submit', data: { disable_with: 'Uploading ...' } %></div>
     <% end %>
 
     <div class="update-status">
@@ -11,15 +11,10 @@
 
 <script>
     var $update_status = $('.update-status');
+    receiveBroadCast();
 
     $('#upload-submit').click(function (e) {
-        e.preventDefault();
-        $(this).prop('disabled', true);
-
         $update_status.text('Uploading the file ...');
-        $('.csv-upload-btn-wrapper form').submit();
-
-        receiveBroadCast();
     });
 
     function receiveBroadCast(){
