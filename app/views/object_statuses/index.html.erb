@@ -10,18 +10,20 @@
   </div>
 
   <div class="objects-query-wrapper">
-    <%= select_tag 'object_type', options_for_select(ObjectStatus::OBJECT_TYPES) %>
-    <%= text_field_tag 'object_id', nil, { placeholder: 'Enter ID... ', required: true } %>
-    <%= text_field_tag 'timestamp', nil, { placeholder: 'Enter Timestamp... ', required: true } %>
-    <%= submit_tag 'Find status' %>
+    <%= text_field_tag 'query-ip', nil, placeholder: "Ex: What's the state of Order Id=1 At timestamp=1484733173 ?" %>
+    <%= submit_tag 'Query', id: 'query-btn' %>
 
-    <div class="result-table-wrapper">
-
-    </div>
+    <div class="status-msg"></div>
   </div>
 </div>
 
 <% content_for :head do %>
   <%= javascript_include_tag 'object_statuses/index' %>
   <%= stylesheet_link_tag 'object_statuses/index' %>
+<% end %>
+
+<% content_for :js do %>
+  <script type="application/javascript">
+    var object_status_url = '<%= get_object_changes_object_statuses_path %>';
+  </script>
 <% end %>

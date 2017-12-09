@@ -3,7 +3,6 @@ class ObjectStatus < ApplicationRecord
   # Skipping all model validations since there is DB validation.
   # And, adding model validations will slow down bulk insert.
 
-  OBJECT_TYPES = %w(Order Product Invoice)
   IMPORT_STATUS_BROADCAST_THRESHOLD = 1000
 
   def self.perform_import(file)
@@ -35,6 +34,16 @@ class ObjectStatus < ApplicationRecord
     ObjectStatus.import object_status, on_duplicate_key_ignore: true,  validate: false
 
     broadcast_import_status('Import Successful')
+  end
+
+  def self.get_object_changes(object_params)
+    object_status = ObjectStatus.where(object_type: object_params[:object_type],
+                                       object_id: object_params[:object_id],
+                                       timestamp: object_params[:timestamp]).first
+    
+    object_changes = object_status.present? ? object_status.object_changes : {}
+
+    { status: true, object_changes: object_changes.to_json }
   end
 
   private

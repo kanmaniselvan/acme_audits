@@ -1,8 +1,11 @@
 Rails.application.routes.draw do
   root to: 'object_statuses#index'
 
-  resources :object_statuses, only: [:index, :show] do
-    post :upload_csv, on: :collection
+  resources :object_statuses, only: [:index] do
+    collection do
+      post :upload_csv
+      get :get_object_changes
+    end
   end
 
 end

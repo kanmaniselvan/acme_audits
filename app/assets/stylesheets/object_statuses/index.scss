@@ -11,19 +11,18 @@
     #file {
       margin-right: 10%;
     }
+  }
 
-    .update-status {
-      margin-top: 5%;
-      color: #70736e;
-    }
+  .update-status, .status-msg {
+    margin-top: 5%;
+    color: #70736e;
   }
 
   .objects-query-wrapper {
-
-  }
-
-  .result-table-wrapper {
-
+    #query-ip {
+      width: 70%;
+      padding: 3px;
+    }
   }
 }
 

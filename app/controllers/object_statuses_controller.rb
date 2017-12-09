@@ -18,4 +18,13 @@ class ObjectStatusesController < ApplicationController
     flash[:error] = "Error occurred: #{ex}"
     redirect_to object_statuses_path
   end
+
+  def get_object_changes
+    render json: ObjectStatus.get_object_changes(object_status_params)
+  end
+
+  private
+  def object_status_params
+    params.permit(:object_type, :object_id, :timestamp)
+  end
 end
