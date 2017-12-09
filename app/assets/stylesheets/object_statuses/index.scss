@@ -1,0 +1,29 @@
+.body-wrapper {
+  text-align: center;
+
+  .csv-upload-btn-wrapper, .objects-query-wrapper, .result-table-wrapper {
+    padding: 5%;
+  }
+
+  .csv-upload-btn-wrapper {
+    border-bottom: 1px solid #bfbfbf;
+
+    #file {
+      margin-right: 10%;
+    }
+
+    .update-status {
+      margin-top: 5%;
+      color: #70736e;
+    }
+  }
+
+  .objects-query-wrapper {
+
+  }
+
+  .result-table-wrapper {
+
+  }
+}
+

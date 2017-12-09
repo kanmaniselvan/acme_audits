@@ -7,11 +7,15 @@ class ObjectStatusesController < ApplicationController
     file = params[:file]
 
     if file.blank? || 'csv' != file.path.split('.').last
-      render json: { status: false, message: 'Invalid CSV file given!' } and return
+      flash[:error] = 'Invalid CSV file uploaded!'
+      redirect_to object_statuses_path and return
     end
 
-    render json: ObjectStatus.perform_import(File.open(file.path))
+    ObjectStatus.perform_import(File.open(file.path))
+
+    redirect_to object_statuses_path
   rescue StandardError => ex
-    render json: { status: ex, message: "Error occurred: #{ex}" }
+    flash[:error] = "Error occurred: #{ex}"
+    redirect_to object_statuses_path
   end
 end

@@ -1,8 +1,12 @@
 <div class="body-wrapper">
   <div class="csv-upload-btn-wrapper">
     <%= form_tag(upload_csv_object_statuses_path, multipart: true) do %>
-      <div><%= file_field_tag 'file' %><%= submit_tag 'Upload CSV' %></div>
+      <div><%= file_field_tag 'file' %><%= submit_tag 'Upload CSV', id: 'upload-submit' %></div>
     <% end %>
+
+    <div class="update-status">
+      <%= flash[:error] %>
+    </div>
   </div>
 
   <div class="objects-query-wrapper">
@@ -17,28 +21,7 @@
   </div>
 </div>
 
-<style>
-  .body-wrapper {
-    text-align: center;
-  }
-
-  #file {
-    margin-right: 10%;
-  }
-
-  .csv-upload-btn-wrapper, .objects-query-wrapper, .result-table-wrapper {
-    padding: 5%;
-  }
-
-  .csv-upload-btn-wrapper {
-    border-bottom: 1px solid #bfbfbf;
-  }
-
-  .objects-query-wrapper {
-
-  }
-
-  .result-table-wrapper {
-
-  }
-</style>
+<% content_for :head do %>
+  <%= javascript_include_tag 'object_statuses/index' %>
+  <%= stylesheet_link_tag 'object_statuses/index' %>
+<% end %>
