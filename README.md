@@ -1,24 +1,41 @@
-# README
+# ACME Audits
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
 
-Things you may want to cover:
+# About
+This application that consumes/accepts a CSV (Comma Separated Values) file of N-Rows and perform bulk import of all data into the data base.
 
-* Ruby version
+Each Row is comprised of:
+ - **object_id:** is a unique identifier for a specific object.
+ - **object_type:** denotes the object type.
+ - **timestamp:** needs no explanation
+ - **object_changes:** serialized json comprised of properties that changed at **timestamp**, and their accompanying values.
 
-* System dependencies
+Here's an example CSV:
 
-* Configuration
+```
+object_id,object_type,timestamp,object_changes	
+1,Order,1484730554,"{\"customer_name\":\"Jack\",\"customer_address\":\"Trade St.\",\"status\":\"unpaid\"}"
+2,Order,1484730623,"{\"customer_name\":\"Sam\",\"customer_address\":\"Gecko St.\",\"status\":\"unpaid\"}"
 
-* Database creation
+```
 
-* Database initialization
+After the application consumes the CSV, the user will be able to query the system for the states of objects
+consumed at a specific point in time.
 
-* How to run the test suite
+Examples:-
+1. What's the state of Order Id=1 At timestamp=1484733173 ? <br>
+`{"customer_name"=>"Jack", "customer_address"=>"Trade St.", "status"=>"paid", "ship_date"=>"2017-01-18", "shipping_provider"=>"DHL"}`
 
-* Services (job queues, cache servers, search engines, etc.)
+2. What's the state of Order Id=1 At timestamp=1484722542 ? <br>
+`{} # Object Didn't Exist at that time`
 
-* Deployment instructions
+3. What's the state of Order Id=1 At timestamp=1484731400 ? <br>
+`{"customer_name"=>"Jack", "customer_address"=>"Trade St.", "status"=>"unpaid"}`
 
-* ...
+# Setup
+
+`> bundle install`<br>
+`> rake db:create`<br>
+`> rake db:migrate`<br>
+
+Start the server. Hit `localhost:3000`
