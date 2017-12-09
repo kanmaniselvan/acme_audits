@@ -9,6 +9,7 @@ $(document).ready(function () {
 
     $('#upload-submit').click(function (e) {
         e.preventDefault();
+        $(this).prop('disabled', true);
 
         $update_status.text('Uploading the file ...');
         $('.csv-upload-btn-wrapper form').submit();

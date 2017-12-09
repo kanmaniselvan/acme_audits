@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20171209024424) do
     t.string "object_type", null: false
     t.string "timestamp", null: false
     t.jsonb "object_changes", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
     t.index ["object_type", "object_id", "timestamp", "object_changes"], name: "uniq_object_statuses_record_index", unique: true
   end
 
