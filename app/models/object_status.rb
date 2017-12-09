@@ -3,6 +3,8 @@ class ObjectStatus < ApplicationRecord
   # Skipping all model validations since there is DB validation.
   # And, adding model validations will slow down bulk insert.
 
+  OBJECT_TYPES = %w(Order Product Invoice)
+
   def self.perform_import(file)
     object_status = []
 

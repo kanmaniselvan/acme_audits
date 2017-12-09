@@ -1,3 +1,8 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
+  root to: 'object_statuses#index'
+
+  resources :object_statuses, only: [:index, :show] do
+    post :upload_csv, on: :collection
+  end
+
 end

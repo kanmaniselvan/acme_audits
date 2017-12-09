@@ -1,0 +1,44 @@
+<div class="body-wrapper">
+  <div class="csv-upload-btn-wrapper">
+    <%= form_tag(upload_csv_object_statuses_path, multipart: true) do %>
+      <div><%= file_field_tag 'file' %><%= submit_tag 'Upload CSV' %></div>
+    <% end %>
+  </div>
+
+  <div class="objects-query-wrapper">
+    <%= select_tag 'object_type', options_for_select(ObjectStatus::OBJECT_TYPES) %>
+    <%= text_field_tag 'object_id', nil, { placeholder: 'Enter ID... ', required: true } %>
+    <%= text_field_tag 'timestamp', nil, { placeholder: 'Enter Timestamp... ', required: true } %>
+    <%= submit_tag 'Find status' %>
+
+    <div class="result-table-wrapper">
+
+    </div>
+  </div>
+</div>
+
+<style>
+  .body-wrapper {
+    text-align: center;
+  }
+
+  #file {
+    margin-right: 10%;
+  }
+
+  .csv-upload-btn-wrapper, .objects-query-wrapper, .result-table-wrapper {
+    padding: 5%;
+  }
+
+  .csv-upload-btn-wrapper {
+    border-bottom: 1px solid #bfbfbf;
+  }
+
+  .objects-query-wrapper {
+
+  }
+
+  .result-table-wrapper {
+
+  }
+</style>
