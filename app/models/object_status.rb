@@ -40,10 +40,19 @@ class ObjectStatus < ApplicationRecord
     object_status = ObjectStatus.where(object_type: object_params[:object_type],
                                        object_id: object_params[:object_id],
                                        timestamp: object_params[:timestamp]).first
-    
+
     object_changes = object_status.present? ? object_status.object_changes : {}
 
     { status: true, object_changes: object_changes.to_json }
+  end
+
+  # This will be run through CRON on the first day of every month to destroy all
+  # month old entries.
+  # Steps:
+  #> crontab -e
+  #> 0 0 1 * * /bin/bash -l -c 'cd <PROJECT_PATH> && RAILS_ENV=<ENV> bundle exec rails runner "ObjectStatus.delete_one_month_old_objects" --silent'
+  def self.delete_one_month_old_objects
+    ObjectStatus.where('DATE(created_at) <= ?', Date.today - 1.month).delete_all
   end
 
   private
