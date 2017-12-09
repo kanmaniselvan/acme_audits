@@ -1,14 +1,4 @@
 <div class="body-wrapper">
-  <div class="csv-upload-btn-wrapper">
-    <%= form_tag(upload_csv_object_statuses_path, multipart: true) do %>
-      <div><%= file_field_tag 'file' %><%= submit_tag 'Upload CSV', id: 'upload-submit' %></div>
-    <% end %>
-
-    <div class="update-status">
-      <%= flash[:error] %>
-    </div>
-  </div>
-
   <div class="objects-query-wrapper">
     <%= text_field_tag 'query-ip', nil, placeholder: "Ex: What's the state of Order Id=1 At timestamp=1484733173 ?" %>
     <%= submit_tag 'Query', id: 'query-btn' %>

@@ -1,21 +1,7 @@
-//= require jquery
-//= require cable
-
-var $update_status, $status_msg;
+var $status_msg;
 $(document).ready(function () {
-    $update_status = $('.update-status');
     $status_msg = $('.status-msg');
     var $query_ip = $('#query-ip');
-
-    $('#upload-submit').click(function (e) {
-        e.preventDefault();
-        $(this).prop('disabled', true);
-
-        $update_status.text('Uploading the file ...');
-        $('.csv-upload-btn-wrapper form').submit();
-
-        receiveBroadCast();
-    });
 
     $('#query-btn').click(function (e) {
         e.stopImmediatePropagation();
@@ -29,19 +15,6 @@ $(document).ready(function () {
         }
     });
 });
-
-function receiveBroadCast(){
-    App.cable.subscriptions.create(
-        {
-            channel: 'CsvImportStatusChannel'
-        },
-        {
-            received: function(data) {
-                $update_status.text(data.message);
-            }
-        }
-    );
-}
 
 function parseInputsFromQuery(query_string) {
     var inputs = {};

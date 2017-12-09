@@ -1,5 +1,6 @@
 .body-wrapper {
   text-align: center;
+  font-size: 14px;
 
   .csv-upload-btn-wrapper, .objects-query-wrapper, .result-table-wrapper {
     padding: 5%;
@@ -16,6 +17,7 @@
   .update-status, .status-msg {
     margin-top: 5%;
     color: #70736e;
+    font-weight: bold;
   }
 
   .objects-query-wrapper {
